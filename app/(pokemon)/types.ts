@@ -1,19 +1,38 @@
-export type PokemonList = {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: PokemonUtilities[];
+type Maybe = string | null;
+
+type PokemonAbilities = {
+  ability: PokemonUtilities;
+  is_hidden: boolean;
+  slot: number;
 };
 
-export type Pokemon = {
-  abilities: any[];
-  name: string;
-  images: string;
-  types: TypesPokemon[];
-  weight: number;
-  height: number;
-  moves: MovePokemon[];
-  stats: PokemonStats[];
+type PokemonSprites = {
+  back_default: string;
+  back_female: Maybe;
+  back_shiny: Maybe;
+  back_shiny_female: Maybe;
+  front_default: string;
+  front_female: Maybe;
+  front_shiny: Maybe;
+  front_shiny_female: Maybe;
+  other: SpritesOther;
+};
+
+type SpritesOther = {
+  dream_world: {
+    front_default: string;
+    front_female: Maybe;
+  };
+  home: {
+    front_default: string;
+    front_female: Maybe;
+    front_shiny: Maybe;
+    front_shiny_female: Maybe;
+  };
+  ["official-artwork"]: {
+    front_default: string;
+    front_shiny: Maybe;
+  };
 };
 
 type PokemonUtilities = {
@@ -35,4 +54,43 @@ type MovePokemon = {
 type TypesPokemon = {
   slot: number;
   type: PokemonUtilities;
+};
+
+type EffectEntries = {
+  effect: string;
+  language: PokemonUtilities;
+  short_effect: string;
+};
+
+export type PokemonList = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: PokemonUtilities[];
+};
+
+export type Pokemon = {
+  abilities: PokemonAbilities[];
+  id: number;
+  name: string;
+  images: string;
+  types: TypesPokemon[];
+  weight: number;
+  height: number;
+  moves: MovePokemon[];
+  stats: PokemonStats[];
+  sprites: PokemonSprites;
+};
+
+export type PokemonMove = {
+  accuracy: number;
+  power: number;
+  name: string;
+  effect_entries: EffectEntries[];
+};
+
+export type Abilities = {
+  id: number;
+  name: string;
+  effect_entries: EffectEntries[];
 };

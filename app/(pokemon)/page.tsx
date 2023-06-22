@@ -1,6 +1,15 @@
 import Link from "next/link";
-import Image from "next/image";
-import { PokemonList } from "./types";
+import { Pokemon, PokemonList } from "./types";
+
+import ButtonLink from "@/components/ButtonLink";
+import Container from "@/components/Container";
+import PokeList from "@/components/PokeList";
+
+interface PageProps {
+  searchParams: {
+    page?: string;
+  };
+}
 
 async function getListPokemon(page: number): Promise<PokemonList> {
   const limit = 20;
@@ -13,28 +22,37 @@ async function getListPokemon(page: number): Promise<PokemonList> {
   return response.json();
 }
 
-interface PageProps {
-  searchParams: {
-    page?: string;
-  };
+async function getPokemonForm(url: string): Promise<Pokemon> {
+  const response = await fetch(url);
+
+  return response.json();
 }
 
 export default async function Page({ searchParams }: PageProps) {
   const page = searchParams.page ? parseInt(searchParams.page) : 1;
-
   const pokemonList = await getListPokemon(page);
+
+  const promisePokemon = pokemonList.results.map((data) => {
+    return getPokemonForm(data.url);
+  });
+
+  const pokeData = await Promise.all(promisePokemon);
+
   return (
-    <div>
-      {pokemonList.results.map((pokemon) => (
-        <div key={pokemon.name}>{pokemon.name}</div>
-      ))}
-      <Link href={`/?page=${page - 1}`} passHref>
-        <button disabled={page <= 1}>previous</button>
-      </Link>
-      {page}
-      <Link href={`/?page=${page + 1}`} passHref>
-        <button disabled={page * 20 > pokemonList.count}>next</button>
-      </Link>
-    </div>
+    <Container>
+      <PokeList pokemons={pokeData} />
+      <div className="flex items-center gap-4 mt-6 mx-auto">
+        <ButtonLink href={`/?page=${page - 1}`} disabled={page <= 1}>
+          Previous
+        </ButtonLink>
+        <span className="font-semibold">{page}</span>
+        <ButtonLink
+          href={`/?page=${page + 1}`}
+          disabled={page * 20 > pokemonList.count}
+        >
+          Next
+        </ButtonLink>
+      </div>
+    </Container>
   );
 }
