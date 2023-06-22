@@ -1,3 +1,10 @@
+export type PokemonList = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: PokemonUtilities[];
+};
+
 export type Pokemon = {
   abilities: any[];
   name: string;

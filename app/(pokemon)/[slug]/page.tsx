@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import { absoluteUrl } from "@/lib/utils";
+import { absoluteUrl, firstUppercase } from "@/lib/utils";
 import { Pokemon } from "../types";
 
 interface PageProps {
@@ -9,10 +9,9 @@ interface PageProps {
   };
 }
 
-async function getPokemonFromParams(id: string): Promise<Pokemon | undefined> {
-  console.log(id);
+async function getPokemonFromParams(id: string): Promise<Pokemon> {
   const response = await fetch("https://pokeapi.co/api/v2/pokemon/" + id);
-  return response.json() as Promise<Pokemon>;
+  return response.json();
 }
 
 export async function generateMetadata({
@@ -25,7 +24,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: pokemon.name,
+    title: firstUppercase(pokemon.name),
   };
 }
 
@@ -35,5 +34,5 @@ export default async function PagePage({ params }: PageProps) {
     return {};
   }
 
-  return <div>Hello pokemon {pokemon.name}</div>;
+  return <div>{pokemon.name}</div>;
 }
