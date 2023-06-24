@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
-import { firstUppercase, randomBoolean, createId } from "@/lib/utils";
+import { firstUppercase, createId } from "@/lib/utils";
 
-import { Abilities, MovePokemon, Pokemon, PokemonMove } from "../types";
+import { Abilities, Pokemon, PokemonMove } from "../types";
 import Image from "next/image";
 import Container from "@/components/Container";
 import LinkBack from "@/components/LinkBack";
@@ -19,6 +19,16 @@ interface PageProps {
 async function getDataByUrl<T extends any>(url: string): Promise<T> {
   const response = await fetch(url);
   return response.json();
+}
+
+function getPromiseMove(pokemon: Pokemon): Promise<PokemonMove>[] {
+  const promised: Promise<PokemonMove>[] = [];
+
+  for (let i = 0; i < 3; i++) {
+    promised.push(getDataByUrl<PokemonMove>(pokemon.moves[i].move.url));
+  }
+
+  return promised;
 }
 
 export async function generateMetadata({
@@ -41,11 +51,7 @@ export default async function PagePage({ params }: PageProps) {
     return {};
   }
 
-  const moves = await Promise.all(
-    pokemon.moves.map((move) => {
-      return getDataByUrl<PokemonMove>(move.move.url);
-    })
-  );
+  const moves = await Promise.all(getPromiseMove(pokemon));
 
   const abilites = await Promise.all(
     pokemon.abilities.map((ability) => {
@@ -124,12 +130,11 @@ export default async function PagePage({ params }: PageProps) {
                 Moves
               </h4>
               <hr />
-              {moves.map((move, idx) => {
+              {moves.map((move) => {
                 const effectEntrie =
                   move.effect_entries.filter(
                     (entrie) => entrie.language.name === "en"
                   )[0] ?? null;
-                if (idx > 2) return null;
                 return (
                   <div className="mt-2" key={move.id}>
                     <div className="font-semibold text-sky-900 capitalize flex justify-between">
