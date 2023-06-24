@@ -1,9 +1,9 @@
-import Link from "next/link";
+import { Suspense } from "react";
 import { Pokemon, PokemonList } from "./types";
 
 import ButtonLink from "@/components/ButtonLink";
 import Container from "@/components/Container";
-import PokeList from "@/components/PokeList";
+import PokeList, { PokeCardSkeleton } from "@/components/PokeList";
 
 interface PageProps {
   searchParams: {
@@ -39,8 +39,17 @@ export default async function Page({ searchParams }: PageProps) {
   const pokeData = await Promise.all(promisePokemon);
 
   return (
-    <Container>
-      <PokeList pokemons={pokeData} />
+    <Container className="flex flex-col px-4">
+      <Suspense
+        fallback={
+          <div className="grid xl:grid-cols-6 gap-5">
+            <PokeCardSkeleton />
+          </div>
+        }
+      >
+        <PokeList pokemons={pokeData} />
+      </Suspense>
+
       <div className="flex items-center gap-4 mt-6 mx-auto">
         <ButtonLink href={`/?page=${page - 1}`} disabled={page <= 1}>
           Previous

@@ -18,6 +18,16 @@ export function formatDate(input: string | number): string {
   });
 }
 
+export function createId(id: string): string {
+  const len = id.length;
+  let formatedId = id;
+
+  if (len < 3) {
+    formatedId = "0".repeat(2 / len) + formatedId;
+  }
+  return "#" + formatedId;
+}
+
 export function firstUppercase(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }

@@ -46,7 +46,7 @@ type PokemonStats = {
   stat: PokemonUtilities;
 };
 
-type MovePokemon = {
+export type MovePokemon = {
   move: PokemonUtilities;
   version_group_details: any;
 };
@@ -83,8 +83,9 @@ export type Pokemon = {
 };
 
 export type PokemonMove = {
-  accuracy: number;
-  power: number;
+  id: number;
+  accuracy: Maybe;
+  power: Maybe;
   name: string;
   effect_entries: EffectEntries[];
 };
@@ -94,3 +95,10 @@ export type Abilities = {
   name: string;
   effect_entries: EffectEntries[];
 };
+
+export type PersistedPokemon = {
+  id: string;
+  date: number;
+};
+
+export type PokemonWithDate = Pokemon & { date: number };

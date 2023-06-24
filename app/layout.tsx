@@ -3,7 +3,10 @@ import { Inter as FontSans } from "next/font/google";
 import "@/styles/globals.css";
 import { siteConfig } from "@/config/site";
 import { absoluteUrl, cn } from "@/lib/utils";
+
+import { Toaster } from "@/components/ui/toaster";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
+import Navbar from "@/components/Navbar";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -41,8 +44,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
       )}
     >
       <head />
-      <body className="min-h-screen">
+      <body className="min-h-screen flex flex-col">
+        <Navbar />
         {children}
+        <Toaster />
         <TailwindIndicator />
       </body>
     </html>

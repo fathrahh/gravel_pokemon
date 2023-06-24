@@ -7,10 +7,7 @@ export default function Container({
   ...rest
 }: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) {
   return (
-    <div
-      className={cn("flex flex-col container lg:mx-auto", className)}
-      {...rest}
-    >
+    <div className={cn("container lg:mx-auto", className)} {...rest}>
       {children}
     </div>
   );
