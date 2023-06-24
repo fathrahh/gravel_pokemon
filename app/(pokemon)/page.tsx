@@ -39,10 +39,10 @@ export default async function Page({ searchParams }: PageProps) {
   const pokeData = await Promise.all(promisePokemon);
 
   return (
-    <Container className="flex flex-col px-4">
+    <Container className="flex flex-col flex-1 -translate-y-10 px-4 xl:justify-center xl:items-center">
       <Suspense
         fallback={
-          <div className="grid xl:grid-cols-6 gap-5">
+          <div className="grid md:grid-cols-6 gap-5">
             <PokeCardSkeleton />
           </div>
         }
@@ -50,7 +50,7 @@ export default async function Page({ searchParams }: PageProps) {
         <PokeList pokemons={pokeData} />
       </Suspense>
 
-      <div className="flex items-center gap-4 mt-6 mx-auto">
+      <div className="flex items-center gap-4 my-6 lg:my-12 mx-auto">
         <ButtonLink href={`/?page=${page - 1}`} disabled={page <= 1}>
           Previous
         </ButtonLink>

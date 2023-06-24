@@ -2,6 +2,24 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Technology used :
+
+- Nextjs 13
+- Typescript
+- TailwindCSS
+- Rechart (Chart)
+- ShadcnUI
+
+Install dependency
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
 First, run the development server:
 
 ```bash
@@ -14,21 +32,41 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Pages
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This project contains 3 pages
 
-## Learn More
+- Pokemon List page on [http://localhost:3000](http://localhost:3000)
+- Owned Pokemon on [http://localhost:3000/owned](http://localhost:3000/owned)
+- Detaild Pokemon on [http://localhost:3000/1](http://localhost:3000/1) (#example: [slug] = 1)
 
-To learn more about Next.js, take a look at the following resources:
+You can check out all pages code on app directory or image bellow
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### **Poke-List**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+![1687626643222](image/README/1687626643222.png)
 
-## Deploy on Vercel
+### Owned Pages
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+in this page contains 2 states 
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**Empty Pokemon**
+
+
+![1687626833958](image/README/1687626833958.png)
+
+**Owned Pokemon**
+
+![1687626780329](image/README/1687626780329.png)
+
+#### **Pokemon Details**
+
+in this page contains 2 states 
+
+**Pokemon not Obtained**
+
+![1687626973638](image/README/1687626973638.png)
+
+**Obtained Pokemon**
+
+![1687627034494](image/README/1687627034494.png)

@@ -7,7 +7,7 @@ export default function Container({
   ...rest
 }: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) {
   return (
-    <div className={cn("container lg:mx-auto", className)} {...rest}>
+    <div className={cn("container lg:mx-auto max-w-6xl", className)} {...rest}>
       {children}
     </div>
   );

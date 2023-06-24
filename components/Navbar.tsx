@@ -20,7 +20,7 @@ export default function Navbar() {
   const path = usePathname();
 
   return (
-    <nav className="px-6 py-4 mb-4">
+    <nav className="px-6 py-4 mb-8 md:mb-4">
       <Container className="flex">
         <ul className="flex gap-4 mx-auto">
           {navbarItems.map((item) => (

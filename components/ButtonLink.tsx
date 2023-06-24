@@ -14,7 +14,7 @@ export default function ButtonLink({
   return (
     <Link {...{ href }} passHref>
       <button
-        className="bg-red-400 disabled:bg-red-700 hover:bg-red-700/80 transition-colors   min-w-[120px] font-semibold rounded-md px-3 py-2 text-white"
+        className="bg-red-400 disabled:bg-red-700 hover:bg-red-700/80 transition-colors   min-w-[100px] font-semibold rounded-md px-3 py-2 text-white"
         {...rest}
       >
         {children}
