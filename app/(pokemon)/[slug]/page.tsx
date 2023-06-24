@@ -67,7 +67,7 @@ export default async function PagePage({ params }: PageProps) {
   });
 
   return (
-    <Container className="px-4">
+    <Container className="px-4 pb-8">
       <LinkBack className="mb-8" />
       <div className="grid grid-cols-12 gap-5">
         <div className="col-span-12 lg:col-span-4">
